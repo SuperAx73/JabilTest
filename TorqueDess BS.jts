@@ -444,11 +444,3 @@ function Cleanup()
   
   End;
 }
-
-// PRUEBA DE ERRORES - ESTAS LÍNEAS DEBERÍAN MOSTRAR ERRORES:
-$variableNoDefinida = 123;
-FuncionNoReconocida("test");
-TorqueLoadExcel("archivo.xlsx", 123, "parametro_extra");
-StringNoCerrado("texto sin cerrar;
-FuncionConParentesisMal(;
-VariableConError$ = "texto";
