@@ -1,0 +1,273 @@
+{
+    "JabilTest Function": {
+        "prefix": "function",
+        "body": [
+            "function ${1:functionName}()",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "Crea una nueva función JabilTest"
+    },
+    "JabilTest Call": {
+        "prefix": "call",
+        "body": [
+            "call ${1:functionName}();"
+        ],
+        "description": "Llama a una función"
+    },
+    "JabilTest If Statement": {
+        "prefix": "if",
+        "body": [
+            "if (${1:condition})",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "Estructura condicional if"
+    },
+    "JabilTest While Loop": {
+        "prefix": "while",
+        "body": [
+            "while (${1:condition})",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "Bucle while"
+    },
+    "JabilTest For Loop": {
+        "prefix": "for",
+        "body": [
+            "for (${1:initialization}; ${2:condition}; ${3:increment})",
+            "{",
+            "\t$0",
+            "}"
+        ],
+        "description": "Bucle for"
+    },
+    "JabilTest New Variable": {
+        "prefix": "new",
+        "body": [
+            "$${1:variableName} = New(\"${2:Integer}\", ${3:0});"
+        ],
+        "description": "Crea una nueva variable"
+    },
+    "JabilTest String Variable": {
+        "prefix": "newstring",
+        "body": [
+            "$${1:variableName} = New(\"String\", \"${2:value}\");"
+        ],
+        "description": "Crea una nueva variable string"
+    },
+    "JabilTest Integer Variable": {
+        "prefix": "newint",
+        "body": [
+            "$${1:variableName} = New(\"Integer\", ${2:0});"
+        ],
+        "description": "Crea una nueva variable entera"
+    },
+    "JabilTest Set Test Name": {
+        "prefix": "settestname",
+        "body": [
+            "SetTestName(\"${1:Test Name}\");"
+        ],
+        "description": "Establece el nombre de la prueba"
+    },
+    "JabilTest Set Cell Label": {
+        "prefix": "setcelllabel",
+        "body": [
+            "SetCellLabel(\"${1:Cell Label}\");"
+        ],
+        "description": "Establece la etiqueta de la celda"
+    },
+    "JabilTest Update Status": {
+        "prefix": "updatestatus",
+        "body": [
+            "UpdateStatus(\"${1:Status Message}\");"
+        ],
+        "description": "Actualiza el estado"
+    },
+    "JabilTest Update Progress": {
+        "prefix": "updateprogress",
+        "body": [
+            "UpdateProgressBar(${1:0});"
+        ],
+        "description": "Actualiza la barra de progreso"
+    },
+    "JabilTest Sleep": {
+        "prefix": "sleep",
+        "body": [
+            "SleepMilliseconds(${1:1000});"
+        ],
+        "description": "Pausa la ejecución"
+    },
+    "JabilTest Operator Input": {
+        "prefix": "operatorinput",
+        "body": [
+            "$${1:result} = OperatorInputPrompt(\"${2:Enter value}\");"
+        ],
+        "description": "Solicita entrada al operador"
+    },
+    "JabilTest Operator Prompt": {
+        "prefix": "operatorprompt",
+        "body": [
+            "OperatorPrompt(\"${1:Message}\", \"${2:OK}\");"
+        ],
+        "description": "Muestra un prompt al operador"
+    },
+    "JabilTest Show Image": {
+        "prefix": "showimage",
+        "body": [
+            "$${1:handle} = ShowImage(\"${2:imagePath}\", ${3:width}, ${4:height});"
+        ],
+        "description": "Muestra una imagen"
+    },
+    "JabilTest Hide Image": {
+        "prefix": "hideimage",
+        "body": [
+            "HideImage($${1:handle});"
+        ],
+        "description": "Oculta una imagen"
+    },
+    "JabilTest Record Measurement": {
+        "prefix": "recordmeasurement",
+        "body": [
+            "RecordMeasurement(\"${1:Measurement Name}\", $${2:value}, \"${3:unit}\", ${4:false});"
+        ],
+        "description": "Registra una medición"
+    },
+    "JabilTest Record Pass Fail": {
+        "prefix": "recordpassfail",
+        "body": [
+            "RecordMeasurementPassFail(\"${1:Measurement Name}\", $${2:value}, \"${3:unit}\", ${4:true}, ${5:true});"
+        ],
+        "description": "Registra medición con Pass/Fail"
+    },
+    "JabilTest Serial Open": {
+        "prefix": "serialopen",
+        "body": [
+            "$${1:port} = Serial_Open(${2:20}, ${3:9600}, ${4:8}, \"${5:N}\", ${6:1});"
+        ],
+        "description": "Abre puerto serie"
+    },
+    "JabilTest Serial Close": {
+        "prefix": "serialclose",
+        "body": [
+            "Serial_Close($${1:port});"
+        ],
+        "description": "Cierra puerto serie"
+    },
+    "JabilTest Serial Send": {
+        "prefix": "serialsend",
+        "body": [
+            "$${1:result} = Serial_Send($${2:port}, \"${3:command}\");"
+        ],
+        "description": "Envía comando por puerto serie"
+    },
+    "JabilTest Serial Read": {
+        "prefix": "serialread",
+        "body": [
+            "$${1:result} = Serial_Read($${2:port}, ${3:1000});"
+        ],
+        "description": "Lee del puerto serie"
+    },
+    "JabilTest Label": {
+        "prefix": "label",
+        "body": [
+            "Label ${1:labelName}:"
+        ],
+        "description": "Crea una etiqueta"
+    },
+    "JabilTest Goto": {
+        "prefix": "goto",
+        "body": [
+            "goto ${1:labelName};"
+        ],
+        "description": "Salta a una etiqueta"
+    },
+    "JabilTest String Functions": {
+        "prefix": "string",
+        "body": [
+            "StringCat($${1:string1}, $${2:string2})",
+            "StringLength($${3:string})",
+            "StringToUpper($${4:string})",
+            "StringSub($${5:string}, ${6:start}, ${7:length})",
+            "StringParseToFloat($${8:string})"
+        ],
+        "description": "Funciones de cadena comunes"
+    },
+    "JabilTest Math Functions": {
+        "prefix": "math",
+        "body": [
+            "Add($${1:a}, $${2:b})",
+            "Subtract($${3:a}, $${4:b})",
+            "Multiply($${5:a}, $${6:b})",
+            "Divide($${7:a}, $${8:b})",
+            "Round($${9:number}, ${10:0})",
+            "Floor($${11:number})"
+        ],
+        "description": "Funciones matemáticas comunes"
+    },
+    "JabilTest Error Handling": {
+        "prefix": "error",
+        "body": [
+            "$${1:Fail_Text} = StringCat(\"${2:Error message}\", \"\");",
+            "if (${3:condition})",
+            "{",
+            "\tAbort($${1:Fail_Text});",
+            "}"
+        ],
+        "description": "Manejo de errores básico"
+    },
+    "JabilTest Try Retry": {
+        "prefix": "tryretry",
+        "body": [
+            "Label Try${1:Action}:",
+            "${2:// Action code}",
+            "if (${3:error condition})",
+            "{",
+            "\t$${4:attempts} = $${4:attempts} + 1;",
+            "\tif ($${4:attempts} < $${5:limit})",
+            "\t{",
+            "\t\tgoto Try${1:Action};",
+            "\t}",
+            "\tAbort(\"Maximum attempts exceeded\");",
+            "}"
+        ],
+        "description": "Patrón de reintentos"
+    },
+    "JabilTest File Operations": {
+        "prefix": "file",
+        "body": [
+            "CheckFileExists(\"${1:filePath}\")",
+            "CheckDirectoryExists(\"${2:directoryPath}\")",
+            "CreateDirectory(\"${3:directoryPath}\")",
+            "FileCopy(\"${4:source}\", \"${5:destination}\")",
+            "FileDelete(\"${6:filePath}\")"
+        ],
+        "description": "Operaciones de archivo comunes"
+    },
+    "JabilTest Configuration": {
+        "prefix": "config",
+        "body": [
+            "SetTestName(\"${1:Test Name}\");",
+            "SetCellViewMode(\"${2:STATUS}\");",
+            "SetCellLabel(\"${3:Cell Label}\");",
+            "SetDebugVerbosityLevel(\"${4:Verbose}\");",
+            "SetFinalizeFunction(\"${5:Cleanup}\");",
+            "SetFailFunction(\"${6:FailFunction}\");",
+            "SetAbortFunction(\"${7:AbortFunction}\");"
+        ],
+        "description": "Configuración básica de JabilTest"
+    }
+}
+
+
+
+
+
+
+
+
+

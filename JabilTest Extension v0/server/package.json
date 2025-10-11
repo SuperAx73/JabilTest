@@ -1,0 +1,30 @@
+{
+  "name": "jabiltest-language-server",
+  "version": "1.0.0",
+  "description": "Language server for JabilTest",
+  "author": "Axiel Urenda",
+  "license": "MIT",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {
+    "vscode-languageserver": "^8.1.0",
+    "vscode-languageserver-textdocument": "^1.0.4"
+  },
+  "scripts": {
+    "compile": "tsc -b",
+    "watch": "tsc -b -w"
+  },
+  "devDependencies": {
+    "@types/node": "^16.18.0",
+    "typescript": "^4.9.4"
+  }
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,118 @@
+🎯 JABILTEST EXTENSION V1 - INSTRUCCIONES DE INSTALACIÓN
+=======================================================
+
+📋 DESCRIPCIÓN:
+Extensión completa para soporte de lenguaje JabilTest en Cursor/VS Code
+con resaltado de sintaxis, autocompletado y detección de errores en tiempo real.
+
+🚀 INSTALACIÓN AUTOMÁTICA (RECOMENDADA):
+========================================
+
+📱 WINDOWS:
+1. 📂 Abrir Command Prompt o PowerShell
+   - Win + R → "cmd" o "powershell"
+2. 📁 Navegar al directorio
+   cd "ruta\donde\esta\JabilTest Extension v1"
+3. ⚡ Ejecutar instalación
+   INSTALAR.bat
+   O simplemente hacer doble clic en INSTALAR.bat
+
+🐧 MACOS/LINUX:
+1. 📂 Abrir Terminal
+   - macOS: Cmd + Espacio → "Terminal"
+   - Linux: Ctrl + Alt + T
+2. 📁 Navegar al directorio
+   cd "ruta/donde/esta/JabilTest Extension v1"
+3. ⚡ Ejecutar instalación
+   ./INSTALAR.sh
+
+🌐 INSTALADOR UNIVERSAL:
+- Hacer doble clic en INSTALAR.cmd (funciona en ambos sistemas)
+
+4. 🔄 REINICIAR CURSOR
+   - Cerrar Cursor completamente
+   - Abrir Cursor de nuevo
+
+5. ✅ VERIFICAR INSTALACIÓN
+   - Abrir archivo "TorqueDess BS.jts"
+   - Debe aparecer "JabilTest" en la barra inferior
+   - Deben verse errores marcados en rojo (líneas 448-454)
+
+🛠️ INSTALACIÓN MANUAL (SI LA AUTOMÁTICA NO FUNCIONA):
+======================================================
+
+1. 📂 COPIAR ARCHIVOS
+   Copiar todo el contenido de esta carpeta a:
+   - macOS/Linux: ~/.cursor/extensions/axielurenda.jabiltest-language-support-1.0.0/
+   - Windows: %APPDATA%/Cursor/extensions/axielurenda.jabiltest-language-support-1.0.0/
+
+2. ⚙️ CONFIGURAR CURSOR
+   - Abrir Cursor
+   - Ir a Configuración (Cmd+, o Ctrl+,)
+   - Buscar "files.associations"
+   - Agregar: "*.jts": "jabiltest"
+   - Buscar "jabiltest.enableErrorChecking"
+   - Asegurar que esté en "true"
+
+3. 🔄 REINICIAR CURSOR
+
+📁 ARCHIVOS INCLUIDOS:
+=====================
+- package.json              → Configuración de extensión
+- language-configuration.json → Configuración del lenguaje
+- out/                      → Código compilado
+- server/                   → Language Server
+- syntaxes/                 → Resaltado de sintaxis
+- snippets/                 → Autocompletado
+- TorqueDess BS.jts         → Archivo de ejemplo
+- INSTALAR.sh               → Script de instalación automática
+
+✅ FUNCIONALIDADES:
+==================
+- 🎨 Resaltado de sintaxis completo
+- 💡 Autocompletado de 500+ funciones JabilTest
+- ❌ Detección de errores en tiempo real
+- 📝 Snippets predefinidos
+- 🔧 Configuración automática
+
+🔍 VERIFICACIÓN DE FUNCIONAMIENTO:
+==================================
+1. Abrir archivo "TorqueDess BS.jts"
+2. Verificar que aparezca "JabilTest" en la barra inferior
+3. Las líneas 448-454 deben mostrar errores en rojo:
+   - $variableNoDefinida = 123;
+   - FuncionNoReconocida("test");
+   - TorqueLoadExcel("archivo.xlsx", 123, "parametro_extra");
+   - StringNoCerrado("texto sin cerrar;
+   - FuncionConParentesisMal(;
+   - VariableConError$ = "texto";
+
+🚨 SOLUCIÓN DE PROBLEMAS:
+========================
+
+❌ NO APARECE "JABILTEST" EN LA BARRA INFERIOR:
+- Verificar configuración files.associations
+- Reiniciar Cursor completamente
+- Verificar que la extensión esté instalada
+
+❌ NO SE VEN ERRORES EN TIEMPO REAL:
+- Verificar jabiltest.enableErrorChecking = true
+- Reiniciar Language Server: Cmd+Shift+P → "Developer: Reload Window"
+
+❌ NO FUNCIONA EL RESALTADO DE SINTAXIS:
+- Verificar que el archivo tenga extensión .jts
+- Verificar configuración files.associations
+
+❌ NO FUNCIONA EL AUTOCOMPLETADO:
+- Verificar jabiltest.enableAutoComplete = true
+- Reiniciar Cursor
+
+📞 SOPORTE:
+===========
+Si tienes problemas con la instalación:
+1. Verificar que Cursor esté actualizado
+2. Revisar logs de desarrollador: Ayuda → Mostrar Logs de Desarrollador
+3. Intentar instalación manual paso a paso
+
+🎉 ¡DISFRUTA PROGRAMANDO EN JABILTEST!
+======================================

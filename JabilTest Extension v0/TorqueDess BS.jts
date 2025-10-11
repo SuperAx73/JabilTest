@@ -1,0 +1,454 @@
+//**************************************************************************/
+//Version:	Version 1	Junio 19, 2025		Alejandro Tovar/ Hiram Moncayo 
+//Comments:	Initial Script for torque test IMED  LYNX Torque Dessouter
+//**************************************************************************/
+ 
+//***********************************************************
+//	MAIN SCRIPT
+//***********************************************************
+SetTestName("Inicializando Programa");
+SetCellViewMode("STATUS");
+SetCellLabel("TORQUE TEST STATION");
+
+SetDebugVerbosityLevel("Verbose");
+SetFinalizeFunction("Cleanup");
+SetFailFunction("FailTorque");
+SetAbortFunction("AbortTorque");
+
+//***********************************************************
+//	VARIABLES
+//***********************************************************
+$SlideCount                 = New ("Integer",0);	
+$ScrewCount 		= New ("Integer",0);	//Inicializacion de la cantidad de tornillos
+$TorqueAttempt 		= New ("Integer",0);	//Inicializacion de los intentos para instalar un tornillo
+$TorqueAttemptLimit 	= New ("Integer",5);	//Limite de intentos para instalar un tornillo
+
+$UpdateBar 		= New ("Integer",0);	//Inicializacion de la barra de progreso
+SetCellLabel("TORQUE TEST STATION");   
+$WidthScreen = 1080;
+$HeightScreen = 810;
+
+
+//Vairables para MES // ---------------------------------------------------------
+$TARS_Process = "Ensamble Mecanico";	
+$TARS_TesterName = "BOS-EMEC-L200";	
+$TARS_Customer 	= New ("String","Boston");
+$TARS_Division		= New ("String","Boston");
+$TARS_Line 		= New ("String","200");
+$TARS_Site 		= New ("String","12");
+ // ---------------------------------------------------------------------------------
+
+UpdateProgressBar(0);
+
+//***********************************************************
+//	MAIN SCRIPT
+//***********************************************************
+call Initialize_Screen();
+
+call Serial_Check();
+
+call StartAssy();
+
+call Configure_MES();
+
+End;
+
+
+//***********************************************************
+//	FUNCTIONS
+//***********************************************************
+function Serial_Check()
+{
+	SetTestName("Serial Number Validation");
+	$Fail_Text = StringCat("Extension de Numero de Serie Incorrecto","");
+	Label TryScan:
+	$SerialNumber = StringToUpper($SerialNumber);
+	$SerialNumberLength = StringLength($SerialNumber);  
+
+	if ($SerialNumber == "")		//Valida la longitud del numero de serie
+	{
+	$SerialNumber = OperatorInputPrompt("Escanee un numero de serie por favor");
+	goto TryScan;
+	}
+	
+	UpdateStatus("Serial Number Lenght OK...");  
+	while (true)
+	{
+	$CAT01 = StringStartsWith($SerialNumber,"1", true);
+	if($CAT01)
+	{
+		$FileNamePath ="C:\\JabilTest\\Config\\JabilTestVisualAidsBS-CAT1.csv";
+		break;
+	}
+	$CATM = StringStartsWith($SerialNumber,"2", true);
+	if($CATM)
+	{
+		$FileNamePath ="C:\\JabilTest\\Config\\JabilTestVisualAidsBS-CATM.csv";
+		break;
+	}
+	
+	$SerialNumber = OperatorInputPrompt("No se encontro archivo con ese serial, intente de nuevo.");
+
+	}
+	Label OKpath:
+  return;
+}
+
+function StartAssy()
+{
+
+	($TotalSteps, $ObjStepDataList)=TorqueLoadExcel($FileNamePath);
+
+    $ResultStatus= "El # de steps es de" + $TotalSteps;
+    //~ OperatorPrompt($ResultStatus,"OK");
+	
+  $iCurrStep=1;
+  $iPosition = 0;
+  $sFmtMsg= "Iniciando ensamble, Total de Steps=" + $TotalSteps;
+  UpdateStatus($sFmtMsg);  
+  
+  
+      while( $iCurrStep<$TotalSteps )
+	{
+	  call UpdateStepInformation();
+	  call DisplayVisualAidOperatorPrompt_IfApply();    
+	  //~ call MoveTray_IfApply();
+	  call TorqueTest_IfApply();
+	  //Increment step number
+	  $iCurrStep= $iCurrStep + 1;
+	
+      
+	}
+	
+  return;
+}
+
+
+function UpdateStepInformation()
+{
+ //~ SerialPurge($SerialPortTorA);    
+  //Get step information to know how to proceed
+  ($iStepNumberReturned, $sImageFileName, $sHasTorque, $fTorque, $fMinTorque, $fMaxTorque, $iTrayPosition, $sMoveTray, $sApplyAngularTorque, $QtyScrewsByStep, $AngularDesoutterCycle, $sStepName)=TorqueGetStepInfo($iCurrStep,  $ObjStepDataList);
+
+
+  //Confirm step number specified is the same than returned
+  if( $iCurrStep != $iStepNumberReturned )
+  {
+    UpdateStatus("Step specificado NO es el mismo que regreso lista de arreglos");
+    $sFmtMsg = "El número de Step specificado no es el mismo al regresado por arreglo de steps, el programa va a terminar";
+    OperatorPrompt($sFmtMsg, "OK");
+    End;
+  }
+    
+  SetTestName($sStepName);    
+  $sFmtMsg = "Step Num=" + $iStepNumberReturned + ", StepName=" + $sStepName;
+  UpdateStatus($sFmtMsg);  
+  $sFmtMsg = "ImageName=" + $sImageFileName;
+  UpdateStatus($sFmtMsg); 
+  return;  
+}
+
+function DisplayVisualAidOperatorPrompt_IfApply()
+{
+  
+  if($sHasTorque == "No" || $sHasTorque =="NO")
+  {
+    Label RetryEtiquetas:
+    $ButtonText = OperatorPicturePromptSpecifyOptionsWithPosition($sStepName, $sImageFileName, "STRETCH", 850, 1750, "PASA;", 10, 30);
+     if ($sImageFileName =="C:\\JabilTest\\imagenes\\CAT1\\Slide1.png" || $sImageFileName =="C:\\JabilTest\\imagenes\\CATM\\Slide1.png")
+     {
+    UpdateStatus("chequeo de etiquetas");
+    $sFmtMsg = "Introduce por favor cuantas etiquetas colocaste";
+    $qetiquetas = OperatorInputPrompt($sFmtMsg);
+     }
+     if ($qetiquetas != "3")
+     {
+       $sFmtMsg = "No son las etiquetas correctas, intentelo de nuevo";
+       OperatorPrompt($sFmtMsg, "OK");
+       goto RetryEtiquetas;
+     }
+    if ($sImageFileName =="C:\\JabilTest\\imagenes\\CAT1\\Slide2.png" || $sImageFileName =="C:\\JabilTest\\imagenes\\CATM\\Slide2.png")
+     {
+    UpdateStatus("chequeo de patas");
+    $sFmtMsg = "Introduce por favor cuantas patas colocaste";
+    $qpatas = OperatorInputPrompt($sFmtMsg);
+      if ($qpatas != "3")
+       {
+	 $sFmtMsg = "No son las etiquetas correctas, intentelo de nuevo";
+	 OperatorPrompt($sFmtMsg, "OK");
+	 goto RetryEtiquetas;
+       }
+     }
+	    if($ButtonText == "PASA")      
+		{
+	    RecordMeasurementPassFail($sStepName, true,"Bool", false,true);
+		}
+		
+  }
+  
+  return;  
+}
+
+
+function TorqueTest_IfApply()
+{
+   if($sHasTorque == "Yes" || $sHasTorque =="YES")
+   {
+      $sFmtMsg = "Torque test, StepNum=" + $iCurrStep + ", StepName=" + $sStepName + ", Torque Nominal=" + $fTorque ; 
+      //~ OperatorPrompt($sFmtMsg,"OK"); 
+      UpdateStatus($sFmtMsg);
+      call Torque_Test();
+      RecordMeasurement($sStepName, $Value, "InLb", false);
+      RecordMeasurementPassFail($sStepName, $Value,"InLb", true,true);     
+   }
+   
+  return;   
+}
+
+function Torque_Test()
+   {
+	
+    $Fail_Text = StringCat("Falla en funcion Torque","");
+    UpdateStatus("\r\n Screw Step =================================");  
+      
+	$TorqueAttempt = New ("Integer",0);	//Inicializacion de los intentos para instalar un tornillo
+	   
+	  Label RetryTorquea:
+      $FImagePath = $sImageFileName;
+      $ShowImage_handle = ShowImage($FImagePath,$Width,$Height);	//Desplega al operador una imagen del tornillo a instalar
+
+  
+	  $Fail_Text = StringCat("Error al abrir el puerto serial","");
+	  $comPort = Serial_Open(20 ,9600,8,"N",1); //Abrir puerto con el que se cominucara
+	  SleepMilliseconds(200); //Esperamos 200 milisegundosss
+
+	  $TTAString1 = New ("String","");
+	  $Fail_Text = StringCat("Error al obtener la lectura del torque","");
+	  $TTAString1 = Serial_SendMilliseconds($comPort,"","\n",900000);		//Se espera de respuesta un 5C 6E, comando que se manda para que nos le da lectura de torque, espera 900 segundos = 15 min
+	  $TTAString1 = StringTrim($TTAString1);					//Corta los espacios que contenga la respuesta
+	  UpdateStatus($TTAString1);
+	  
+	  $Fail_Text = StringCat("Error al cerrar el puerto serie","");
+	  Serial_Close($comPort);  //Cerramos el puerto donde leemos
+	  SleepMilliseconds(200); 
+	  $Value = StringSub($TTAString1,33,6);		//Corta 4 caracteres a partir del numero 24 para obtener el valor del torque
+	  $Value = StringParseToFloat($Value);           //Lo comvertimos en flotante
+	  
+	  ///******************************PRUEBAS SIN TORQUE*****************************
+	  
+	  //~ $Value = OperatorInputPrompt("ingrese","OK");
+
+	  //~ OperatorPrompt($LowLimit,"OK");
+	  //~ OperatorPrompt($HighLimit,"OK");
+	  //~ OperatorPrompt($Value,"OK");
+	  
+	  ///******************************PRUEBAS SIN TORQUE*****************************  
+
+	  if(($Value < $fMinTorque) || ($Value > $fMaxTorque))		//Evalua los limites del torque si estan dentro de lo que se necesita
+	  {
+		$Fail_Text = StringCat("Medicion del torque incorrecta","");
+		HideImage($ShowImage_handle);		//Cierra la imagen del tornillo a instalar
+		$ImageFailed = $MainPath +"Fail.png";
+		$ShowImage_handle = ShowImage($ImageFailed,350,350);	//Desplega al operador una imagen del tornillo a instalar
+		Sleep(1);
+		HideImage($ShowImage_handle);		//Cierra la imagen del tornillo a instalar
+		RecordMeasurement("Torque value attempt",$Value,"Lbs-in",true);		//Registra el valor de torque tambien para las fallas sin evaluarlo
+		
+		$TorqueAttempt = $TorqueAttempt + 1 ;
+		if ($TorqueAttempt < $TorqueAttemptLimit)		//Evalua los intentos para instalar un tornillo
+		{
+		  goto RetryTorquea;
+		}
+		
+		if ($TorqueAttempt == $TorqueAttemptLimit)		//Evalua los intentos para instalar un tornillo
+		{
+			$AbortMessage = "Limite de intentos superado";
+			$mensaje = OperatorPromptNonBlocking($AbortMessage,600, 600);
+			Sleep(5);
+			CloseForm($mensaje)	
+			Abort($AbortMessage);
+			
+		}
+	  }
+
+	HideImage($ShowImage_handle);		//Cierra la imagen del tornillo a instalar	  
+	$TorqueAttempt =0;
+    Label ExitTorqueTesta:
+    return;  
+  }
+
+function Configure_MES()
+{
+	  EnterCS("Report");
+	  ($month,$day,$year,$hour,$min,$sec,$dayOfWeek) = SystemTime();
+	  $NewLocation1 = "C:\\JabilEye\\mes\\" + $month + "_" + $year + "\\";	//Ruta para respaldo de datos 
+      $NewLocation2 = "\\\\mxchim0pool02\\Ford\\Torque\\";
+	  $NewLocation3 = "C:\\JabilEye\\html\\" + $month + "_" + $year + "\\";	//Ruta para respaldo de datos 
+	  MESReportWriter_ConfigureLocations($NewLocation1,$NewLocation2,true); //Crea reporte a mes en localidad 1 
+	  HtmlReportWriter_ConfigureLocations($NewLocation3, $NewLocation3, true);
+	  $Exists = CheckDirectoryExists($NewLocation1);
+		  if (!$Exists)
+		  {
+		CreateDirectory($NewLocation1);
+		  }
+		  
+	  ExitCS("Report");
+	  ConfigureReporting("MESReportWriter.dll" ,true);		//Se habilita el reporte HTML
+	  ConfigureReporting("HTMLReportWriter.dll" ,true);		//Se habilita el reporte HTML
+      
+
+		
+  return;
+}
+
+///////////////////////////////////////////////  A Q U I   T E R M I N A   C O D I G O   /////////////////////////////////////////////////////
+  
+  
+///***********************************************************
+//	GENERIC FUNCTIONS 
+//***********************************************************
+function Initialize()
+{
+  $Progresion = 0;
+	
+  $TotalSteps=0;
+  $iStepNumber = 0;
+  
+	$MainPath = "C:\\JabilTest\\Config\\";
+    //~ $FileNamePath ="C:\\JabilTest\\Config\\JabilTestVisualAids.csv";
+  
+
+    $portD =3 ; // Puerto Torque
+    //~ $SerialPortTor = SerialOpen($portD,9600,8,"N",1);
+    //~ SerialPurge($SerialPortTor);
+   
+   
+  
+  
+  return;
+  }
+
+
+function GlobalCleanup()
+{
+  HideImage($ShowImage_handle);
+  DeletePersistentVariable("GLOBAL",$modelPath);
+  End;
+}
+
+dbjskfb
+
+
+function Initialize_Screen()
+{
+
+  SetTestName("Initialize Screen Size");		//Se obtienen las dimensiones del monitor para deplegar las imagenes al 85%
+  $Fail_Text = StringCat("Error al inicializar dimensiones del monitor","");
+  // Get the screen size
+  ($ScreenWidth,$ScreenHeight) = GetDisplaySize(0);
+	// Make values for popup window
+  $PopupWidth = $ScreenWidth * 0.85;
+  $PopupWidth = Round($PopupWidth,0);
+  UpdateStatus($PopupWidth);
+  $PopupHeight = $ScreenHeight * 0.85;
+  $PopupHeight = Round($PopupHeight,0);
+  UpdateStatus($PopupHeight);
+  $Width = New("Integer",$PopupWidth);
+  $Height = New("Integer",$PopupHeight);
+  $Popup_X = ($ScreenWidth - $PopupWidth)/2;
+  $Popup_X = Round($Popup_X,0);
+  $Popup_Y = ($ScreenHeight - $PopupHeight)/2;
+  $Popup_Y = Round($Popup_Y,0);
+  //~ $Y = $ScreenHeight/2;
+  
+  $Red1 = New ("Integer",0);			//Configura el color de JabilTest
+  $Green1 = New ("Integer",128);
+  $Blue1 = New ("Integer",128);
+  $Red2 = New ("Integer",128);
+  $Green2 = New ("Integer",128);
+  $Blue2 = New ("Integer",128);
+  $ColorAngle = New ("Integer",0);
+  SetCellColor($Red1,$Green1,$Blue1,$Red2,$Green2,$Blue2,$ColorAngle);  
+  return;
+}
+
+function UpdateProgress()
+{
+   //~ UpdateStatus($UpdateBar);		//Configura constantemente la progresion de la barra de acuerdo a la cantidad de tornillos a instalar
+  if ($UpdateBar == 0)
+  {
+    $NumBar = Divide(100,$ScrewQuantity);
+    $NumBar = Floor($NumBar);
+    $UpdateBar = $NumBar;
+    UpdateProgressBar($UpdateBar);  
+    goto SkipBar;
+  }
+  
+  if ($UpdateBar < 95)
+  {
+    $UpdateBar = $UpdateBar + $NumBar;  
+      if ($UpdateBar > 100)
+      {
+	$UpdateBar = 95;
+      }
+    UpdateProgressBar($UpdateBar);    
+  }
+Label SkipBar:  
+  
+return;
+}
+function FailTorque()
+{
+  UpdateStatus($FailMessage);		//Muestra el mensaje de Abort en JabilTest
+  $Red1 = New ("Integer",128);
+  $Green1 = New ("Integer",64);
+  $Blue1 = New ("Integer",0);
+  $Red2 = New ("Integer",0);
+  $Green2 = New ("Integer",64);
+  $Blue2 = New ("Integer",128);
+  $ColorAngle = New ("Integer",0);
+  SetCellColor($Red1,$Green1,$Blue1,$Red2,$Green2,$Blue2,$ColorAngle);
+  ConfigureReporting("HTML Report Writer",false);
+  ConfigureReporting("MES Report Writer",false);
+}
+End;
+
+
+function AbortTorque()
+{
+  UpdateStatus($AbortMessage);		//Muestra el mensaje de Abort en JabilTest
+  $Red1 = New ("Integer",0);
+  $Green1 = New ("Integer",64);
+  $Blue1 = New ("Integer",128);
+  $Red2 = New ("Integer",0);
+  $Green2 = New ("Integer",64);
+  $Blue2 = New ("Integer",128);
+  $ColorAngle = New ("Integer",0);
+  SetCellColor($Red1,$Green1,$Blue1,$Red2,$Green2,$Blue2,$ColorAngle);
+  ConfigureReporting("HTML Report Writer",false);
+  ConfigureReporting("MES Report Writer",false);
+}
+End;
+//*********************************************************************************************************************************
+//	CleanUpTest FUNCTION
+//*********************************************************************************************************************************
+function Cleanup()
+{
+  SetTestName("Cleanup Step");
+  SetCellViewMode("BROWSER");
+  UpdateStatus("\r\n Cleanup Step =================================");  
+  UpdateProgressBar(100);  
+  SetExtendedPanelMode("NONE");  
+  SetDebugVerbosityLevel("None");  
+  SleepMilliseconds(200);  
+  
+  End;
+}
+
+// PRUEBA DE ERRORES - ESTAS LÍNEAS DEBERÍAN MOSTRAR ERRORES:
+$variableNoDefinida = 123;
+FuncionNoReconocida("test");
+TorqueLoadExcel("archivo.xlsx", 123, "parametro_extra");
+StringNoCerrado("texto sin cerrar;
+FuncionConParentesisMal(;
+VariableConError$ = "texto";

@@ -1,0 +1,164 @@
+{
+  "name": "jabiltest-language-support",
+  "displayName": "JabilTest Language Support",
+  "description": "Extensión completa para soporte de lenguaje JabilTest con corrección de errores, autocompletado y registro de DLLs",
+  "version": "1.0.0",
+  "publisher": "axielurenda",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Debuggers"
+  ],
+  "keywords": [
+    "jabiltest",
+    "silktest",
+    "4test",
+    "testing",
+    "automation",
+    "scripting"
+  ],
+  "activationEvents": [
+    "onLanguage:jabiltest",
+    "onLanguage:4test",
+    "onLanguage:silk",
+    "onLanguage:silktest"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "jabiltest",
+        "aliases": [
+          "JabilTest",
+          "4Test",
+          "SilkTest",
+          "Silk Test"
+        ],
+        "extensions": [
+          ".t",
+          ".inc",
+          ".pln",
+          ".silk",
+          ".jts"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "jabiltest",
+        "scopeName": "source.jabiltest",
+        "path": "./syntaxes/jabiltest.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "jabiltest",
+        "path": "./snippets/jabiltest.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "jabiltest.registerDLL",
+        "title": "Registrar DLL",
+        "category": "JabilTest"
+      },
+      {
+        "command": "jabiltest.unregisterDLL",
+        "title": "Desregistrar DLL",
+        "category": "JabilTest"
+      },
+      {
+        "command": "jabiltest.listRegisteredDLLs",
+        "title": "Listar DLLs Registradas",
+        "category": "JabilTest"
+      },
+      {
+        "command": "jabiltest.configureLanguage",
+        "title": "Configurar Ruta del Lenguaje",
+        "category": "JabilTest"
+      }
+    ],
+    "configuration": {
+      "title": "JabilTest",
+      "properties": {
+        "jabiltest.languagePath": {
+          "type": "string",
+          "default": "",
+          "description": "Ruta donde está instalado JabilTest/SilkTest"
+        },
+        "jabiltest.dllSearchPaths": {
+          "type": "array",
+          "default": [],
+          "description": "Rutas adicionales para buscar DLLs"
+        },
+        "jabiltest.enableAutoComplete": {
+          "type": "boolean",
+          "default": true,
+          "description": "Habilitar autocompletado automático"
+        },
+        "jabiltest.enableErrorChecking": {
+          "type": "boolean",
+          "default": true,
+          "description": "Habilitar verificación de errores en tiempo real"
+        },
+        "jabiltest.enableIntelliSense": {
+          "type": "boolean",
+          "default": true,
+          "description": "Habilitar IntelliSense avanzado"
+        }
+      }
+    },
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceExtname == .t || resourceExtname == .inc || resourceExtname == .pln || resourceExtname == .jts",
+          "command": "jabiltest.registerDLL",
+          "group": "jabiltest"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "jabiltest.registerDLL",
+          "when": "true"
+        },
+        {
+          "command": "jabiltest.unregisterDLL",
+          "when": "true"
+        },
+        {
+          "command": "jabiltest.listRegisteredDLLs",
+          "when": "true"
+        },
+        {
+          "command": "jabiltest.configureLanguage",
+          "when": "true"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^8.1.0",
+    "vscode-languageserver": "^8.1.0",
+    "vscode-languageserver-textdocument": "^1.0.4"
+  }
+}
