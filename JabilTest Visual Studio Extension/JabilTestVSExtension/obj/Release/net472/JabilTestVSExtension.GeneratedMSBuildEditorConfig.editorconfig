@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = JabilTestVSExtension
+build_property.ProjectDir = c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 

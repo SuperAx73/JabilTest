@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" Version="1.0.1">
+  <Identifier Id="JabilTestVSExtension.beb6a57e-1a03-4a99-89d4-e6bd56f2f4d8">
+    <Name>JabilTest Language Support (Visual Studio)</Name>
+    <Author>axielurenda</Author>
+    <Version>1.0.1</Version>
+    <Description xml:space="preserve">Language support for JabilTest files in Visual Studio: file recognition and basic syntax highlighting.</Description>
+    <Locale>en-US</Locale>
+    <Tags>jabiltest,silktest,4test,syntax</Tags>
+    <Installation>
+      <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0,19.0)" />
+      <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[17.0,19.0)" />
+      <InstallationTarget Id="Microsoft.VisualStudio.Enterprise" Version="[17.0,19.0)" />
+    </Installation>
+    <Dependencies>
+      <Dependency Id="Microsoft.Framework.NDP" DisplayName=".NET Framework" Version="[4.7.2,)" />
+    </Dependencies>
+    <Prerequisites>
+      <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,19.0)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
+  </Identifier>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="JabilTestVSExtension" Path="|JabilTestVSExtension|" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011" />
+  </Assets>
+</Vsix>

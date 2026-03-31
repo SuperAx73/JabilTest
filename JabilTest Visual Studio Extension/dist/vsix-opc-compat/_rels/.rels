@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="Manifest2010" Type="http://schemas.microsoft.com/developer/vsx-schema/2010" Target="extension.vsixmanifest" />
+  <Relationship Id="Manifest2011" Type="http://schemas.microsoft.com/developer/vsx-schema/2011" Target="extension.vsixmanifest" />
+  <Relationship Id="Manifest2011Alt" Type="http://schemas.microsoft.com/developer/vsx-schema/2011/vsixmanifest" Target="extension.vsixmanifest" />
+</Relationships>

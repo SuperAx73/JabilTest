@@ -1,0 +1,10 @@
+C:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\bin\Release\net472\JabilTestVSExtension.dll
+C:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\bin\Release\net472\JabilTestVSExtension.pdb
+C:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\obj\Release\net472\JabilTestVSExtension.csproj.AssemblyReference.cache
+C:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\obj\Release\net472\JabilTestVSExtension.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\obj\Release\net472\JabilTestVSExtension.AssemblyInfoInputs.cache
+C:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\obj\Release\net472\JabilTestVSExtension.AssemblyInfo.cs
+C:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\obj\Release\net472\JabilTestVSExtension.csproj.CoreCompileInputs.cache
+C:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\obj\Release\net472\JabilTestVSExtension.sourcelink.json
+C:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\obj\Release\net472\JabilTestVSExtension.dll
+C:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVSExtension\obj\Release\net472\JabilTestVSExtension.pdb
