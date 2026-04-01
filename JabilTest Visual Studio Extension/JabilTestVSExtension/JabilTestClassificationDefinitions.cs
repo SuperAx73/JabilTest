@@ -35,7 +35,7 @@ internal static class JabilTestClassificationDefinitions
 
     [Export(typeof(ClassificationTypeDefinition))]
     [Name(FunctionClassificationName)]
-    [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+    [BaseDefinition(PredefinedClassificationTypeNames.Keyword)]
     internal static ClassificationTypeDefinition? FunctionType;
 
     [Export(typeof(ClassificationTypeDefinition))]
