@@ -40,6 +40,6 @@ internal static class JabilTestClassificationDefinitions
 
     [Export(typeof(ClassificationTypeDefinition))]
     [Name(BuiltInFunctionClassificationName)]
-    [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+    [BaseDefinition(PredefinedClassificationTypeNames.Keyword)]
     internal static ClassificationTypeDefinition? BuiltInFunctionType;
 }

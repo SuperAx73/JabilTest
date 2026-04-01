@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JabilTestVSExtension")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1+02be4c6dc50b8f73f025037f2939919c8b18ecc2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1+62e23b7abb91b19b449b25c119a020f71e5dfa75")]
 [assembly: System.Reflection.AssemblyProductAttribute("JabilTestVSExtension")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JabilTestVSExtension")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.1.0")]
