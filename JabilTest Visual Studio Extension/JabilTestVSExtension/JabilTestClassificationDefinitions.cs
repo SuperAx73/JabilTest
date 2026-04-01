@@ -12,6 +12,7 @@ internal static class JabilTestClassificationDefinitions
     public const string StringClassificationName = "JabilTestString";
     public const string NumberClassificationName = "JabilTestNumber";
     public const string FunctionClassificationName = "JabilTestFunction";
+    public const string BuiltInFunctionClassificationName = "JabilTestBuiltInFunction";
 
     [Export(typeof(ClassificationTypeDefinition))]
     [Name(KeywordClassificationName)]
@@ -36,4 +37,9 @@ internal static class JabilTestClassificationDefinitions
     [Name(FunctionClassificationName)]
     [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
     internal static ClassificationTypeDefinition? FunctionType;
+
+    [Export(typeof(ClassificationTypeDefinition))]
+    [Name(BuiltInFunctionClassificationName)]
+    [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
+    internal static ClassificationTypeDefinition? BuiltInFunctionType;
 }

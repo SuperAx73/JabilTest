@@ -1,12 +1,4 @@
 c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\bin\Release\JabilTestVsixPackage.dll
 c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\obj\Release\JabilTestVsixPackage.csproj.AssemblyReference.cache
-c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\obj\Release\_EmptyResource.resources
-c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\obj\Release\JabilTestVsixPackage.csproj.GenerateResource.cache
 c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\obj\Release\JabilTestVsixPackage.csproj.CoreCompileInputs.cache
 c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\obj\Release\JabilTestVsixPackage.dll
-c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\obj\Release\merged.source.extension.vsixmanifest
-c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\obj\Release\extension.vsixmanifest
-c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\bin\Release\JabilTestVsixPackage.vsix
-c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\obj\Release\files.json
-c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\obj\Release\createTemplateManifests.cache
-c:\Users\4124279\Documents\git personal\JabilTest\JabilTest Visual Studio Extension\JabilTestVsixPackage\bin\Release\extension.vsixmanifest
