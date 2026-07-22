@@ -8,6 +8,13 @@ con resaltado de sintaxis, autocompletado y detección de errores en tiempo real
 🚀 INSTALACIÓN AUTOMÁTICA (RECOMENDADA):
 ========================================
 
+✅ MÉTODO OFICIAL (MÁS ESTABLE EN OTRAS PCS):
+1. Generar el archivo VSIX: jabiltest-language-support-1.0.0.vsix
+2. Instalar con comando:
+   - VS Code: code --install-extension jabiltest-language-support-1.0.0.vsix --force
+   - VS Code Insiders: code-insiders --install-extension jabiltest-language-support-1.0.0.vsix --force
+3. Reiniciar el editor
+
 📱 WINDOWS:
 1. 📂 Abrir Command Prompt o PowerShell
    - Win + R → "cmd" o "powershell"
@@ -29,9 +36,9 @@ con resaltado de sintaxis, autocompletado y detección de errores en tiempo real
 🌐 INSTALADOR UNIVERSAL:
 - Hacer doble clic en INSTALAR.cmd (funciona en ambos sistemas)
 
-4. 🔄 REINICIAR CURSOR
-   - Cerrar Cursor completamente
-   - Abrir Cursor de nuevo
+4. 🔄 REINICIAR EDITOR
+   - Cerrar VS Code/Cursor completamente
+   - Abrir VS Code/Cursor de nuevo
 
 5. ✅ VERIFICAR INSTALACIÓN
    - Abrir archivo "TorqueDess BS.jts"
@@ -42,19 +49,22 @@ con resaltado de sintaxis, autocompletado y detección de errores en tiempo real
 ======================================================
 
 1. 📂 COPIAR ARCHIVOS
-   Copiar todo el contenido de esta carpeta a:
-   - macOS/Linux: ~/.cursor/extensions/axielurenda.jabiltest-language-support-1.0.0/
-   - Windows: %APPDATA%/Cursor/extensions/axielurenda.jabiltest-language-support-1.0.0/
+   Copiar todo el contenido de esta carpeta a una de estas rutas:
+   - VS Code (Windows): %USERPROFILE%/.vscode/extensions/axielurenda.jabiltest-language-support-1.0.0/
+   - VS Code (macOS/Linux): ~/.vscode/extensions/axielurenda.jabiltest-language-support-1.0.0/
+   - VS Code Insiders: ~/.vscode-insiders/extensions/axielurenda.jabiltest-language-support-1.0.0/
+   - Cursor (Windows): %APPDATA%/Cursor/extensions/axielurenda.jabiltest-language-support-1.0.0/
+   - Cursor (macOS/Linux): ~/.cursor/extensions/axielurenda.jabiltest-language-support-1.0.0/
 
-2. ⚙️ CONFIGURAR CURSOR
-   - Abrir Cursor
+2. ⚙️ CONFIGURAR EDITOR
+   - Abrir VS Code o Cursor
    - Ir a Configuración (Cmd+, o Ctrl+,)
    - Buscar "files.associations"
    - Agregar: "*.jts": "jabiltest"
    - Buscar "jabiltest.enableErrorChecking"
    - Asegurar que esté en "true"
 
-3. 🔄 REINICIAR CURSOR
+3. 🔄 REINICIAR EDITOR
 
 📁 ARCHIVOS INCLUIDOS:
 =====================
@@ -110,7 +120,7 @@ con resaltado de sintaxis, autocompletado y detección de errores en tiempo real
 📞 SOPORTE:
 ===========
 Si tienes problemas con la instalación:
-1. Verificar que Cursor esté actualizado
+1. Verificar que VS Code/Cursor esté actualizado
 2. Revisar logs de desarrollador: Ayuda → Mostrar Logs de Desarrollador
 3. Intentar instalación manual paso a paso
 

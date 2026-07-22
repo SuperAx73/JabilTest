@@ -7,7 +7,7 @@
 WINDOWS: Hacer doble clic en INSTALAR.bat
 MAC/LINUX: Ejecutar ./INSTALAR.sh
 UNIVERSAL: Hacer doble clic en INSTALAR.cmd
-2. Reiniciar Cursor
+2. Reiniciar VS Code/Cursor
 3. Abrir archivo .jts
 4. ¡Listo!
 

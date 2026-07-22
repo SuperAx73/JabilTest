@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bZvtaeKon1c=",
+  "dgSpecHash": "jR8VVwNDl/s=",
   "success": true,
-  "projectFilePath": "C:\\Users\\4124279\\Documents\\git personal\\JabilTest\\JabilTest Visual Studio Extension\\JabilTestVSExtension\\JabilTestVSExtension.csproj",
+  "projectFilePath": "c:\\Users\\4124279\\Documents\\git personal\\JabilTest\\JabilTest Visual Studio Extension\\JabilTestVSExtension\\JabilTestVSExtension.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\4124279\\.nuget\\packages\\envdte\\17.10.40170\\envdte.17.10.40170.nupkg.sha512",
     "C:\\Users\\4124279\\.nuget\\packages\\envdte100\\17.10.40170\\envdte100.17.10.40170.nupkg.sha512",
